@@ -79,7 +79,7 @@ Satellite *SatelliteNetwork::getSatellite(size_t n) {
     }
 }
 
-int SatelliteNetwork::getNumSatellites() const {
+int SatelliteNetwork::getNumSatellites() {
     return num_satellites;
 }
 
