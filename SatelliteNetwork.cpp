@@ -14,13 +14,20 @@ SatelliteNetwork::SatelliteNetwork() {
 
 // Definition of initializeSatellites method
 void SatelliteNetwork::initializeSatellites() {
-    std::array<u_short, 12> check_array = {1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1};
-    satellite_array[0] = Satellite(1, 5);
-    assert(satellite_array[0].chipSequenceStartsWith(check_array));
+    std::array<u_short, 12> check_array{};
 
-    check_array = {1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1};
+    satellite_array[0] = Satellite(1, 5);
+    if (DEBUG_MODE) {
+        check_array = {1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1};
+        assert(satellite_array[0].chipSequenceStartsWith(check_array));
+    }
+
+
     satellite_array[1] = Satellite(2, 6);
-    assert(satellite_array[1].chipSequenceStartsWith(check_array));
+    if (DEBUG_MODE) {
+        check_array = {1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1};
+        assert(satellite_array[1].chipSequenceStartsWith(check_array));
+    }
 
     satellite_array[2] = Satellite(3, 7);
     satellite_array[3] = Satellite(4, 8);
@@ -32,9 +39,12 @@ void SatelliteNetwork::initializeSatellites() {
     satellite_array[9] = Satellite(1, 2);
     satellite_array[10] = Satellite(2, 3);
 
-    check_array = {1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1};
+
     satellite_array[11] = Satellite(4, 5);
-    assert(satellite_array[11].chipSequenceStartsWith(check_array));
+    if (DEBUG_MODE) {
+        check_array = {1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1};
+        assert(satellite_array[11].chipSequenceStartsWith(check_array));
+    }
     satellite_array[12] = Satellite(5, 6);
     satellite_array[13] = Satellite(6, 7);
     satellite_array[14] = Satellite(7, 8);
@@ -46,13 +56,19 @@ void SatelliteNetwork::initializeSatellites() {
     satellite_array[20] = Satellite(4, 7);
     satellite_array[21] = Satellite(5, 8);
 
-    check_array = {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1};
-    satellite_array[22] = Satellite(0, 2);
-    assert(satellite_array[22].chipSequenceStartsWith(check_array));
 
-    check_array = {1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0};
+    satellite_array[22] = Satellite(0, 2);
+    if (DEBUG_MODE) {
+        check_array = {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1};
+        assert(satellite_array[22].chipSequenceStartsWith(check_array));
+    }
+
+
     satellite_array[23] = Satellite(3, 5);
-    assert(satellite_array[23].chipSequenceStartsWith(check_array));
+    if (DEBUG_MODE) {
+        check_array = {1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0};
+        assert(satellite_array[23].chipSequenceStartsWith(check_array));
+    }
 }
 
 Satellite *SatelliteNetwork::getSatellite(size_t n) {
@@ -66,5 +82,4 @@ Satellite *SatelliteNetwork::getSatellite(size_t n) {
 int SatelliteNetwork::getNumSatellites() const {
     return num_satellites;
 }
-
 

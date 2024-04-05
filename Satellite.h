@@ -10,6 +10,7 @@
 #include <cstddef>
 #include <cstdlib>
 #include <iostream>
+#include "globals.h"
 
 class Satellite {
 private:

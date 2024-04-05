@@ -7,6 +7,7 @@
 
 
 #include "Satellite.h"
+#include "globals.h"
 
 class SatelliteNetwork {
 private:

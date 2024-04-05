@@ -31,10 +31,6 @@ void Satellite::printRegistersPositions() const {
               << "]";
 }
 
-u_short Satellite::shiftRegisterNext() {
-    return 0;
-}
-
 void Satellite::printShiftRegisters() const {
     std::cout << "Shift Register 1: [";
     for (auto &i: this->shift_register_1) {

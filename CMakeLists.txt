@@ -7,4 +7,7 @@ add_executable(embedded_lab main.cpp
         Satellite.cpp
         Satellite.h
         SatelliteNetwork.cpp
-        SatelliteNetwork.h)
+        SatelliteNetwork.h
+        globals.h
+        globals.cpp
+        globals.h)
