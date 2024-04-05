@@ -45,8 +45,10 @@ int main(int argc, char *argv[]) {
     file.close(); // Close the file
 
     if (DEBUG_MODE) {
+        //get length of receivedData
+
         // print parsed receivedData
-        std::cout << "Parsed receivedData: ";
+        std::cout << "Parsed receivedData[" << receivedData.size() << "]:" << std::endl;
         for (int i = 0; i < receivedData.size(); i++) {
             std::cout << receivedData[i] << " ";
         }
