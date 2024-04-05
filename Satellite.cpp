@@ -6,60 +6,114 @@
 #include "Satellite.h"
 
 // Constructors
-Satellite::Satellite() : register_1(0), register_2(0),
-                         shift_register{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, chip_sequence{0} {}
+Satellite::Satellite() : regPos_1(0), regPos_2(0),
+                         shift_register_1{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, shift_register_2{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                         chip_sequence{0} {}
 
-Satellite::Satellite(u_short reg1, u_short reg2) : register_1(reg1), register_2(reg2),
-                                                   shift_register{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, chip_sequence{0} {}
-
-// Getter for register_1
-u_short Satellite::getRegister1() const {
-    return register_1;
+Satellite::Satellite(u_short reg1, u_short reg2) : regPos_1(reg1), regPos_2(reg2),
+                                                   shift_register_1{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                                   shift_register_2{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                                   chip_sequence{0} {
+    initializeChipSequence();
 }
 
-// Setter for register_1
-void Satellite::setRegister1(u_short value) {
-    register_1 = value;
-}
-
-// Getter for register_2
-u_short Satellite::getRegister2() const {
-    return register_2;
-}
-
-// Setter for register_2
-void Satellite::setRegister2(u_short value) {
-    register_2 = value;
-}
-
-// Getter for shift register array
-const std::array<u_short, 10> &Satellite::getShiftRegister() const {
-    return shift_register;
-}
-
-// Setter for a specific value in the shift register array
-void Satellite::setShiftRegisterValue(size_t index, u_short value) {
-    if (index < shift_register.size()) {
-        shift_register[index] = value;
-    }
-}
 
 // Getter for chip_sequence
 const std::array<unsigned short, 1023> &Satellite::getChipSequence() const {
     return chip_sequence;
 }
 
-// Setter for a specific value in chip_sequence
-void Satellite::setChipSequenceValue(size_t index, unsigned short value) {
-    if (index < chip_sequence.size()) {
-        chip_sequence[index] = value;
+void Satellite::printRegistersPositions() const {
+    std::cout << "["
+              << std::setw(2) << std::setfill(' ') << regPos_1 + 1
+              << ", "
+              << std::setw(2) << std::setfill(' ') << regPos_2 + 1
+              << "]";
+}
+
+u_short Satellite::shiftRegisterNext() {
+    return 0;
+}
+
+void Satellite::printShiftRegisters() const {
+    std::cout << "Shift Register 1: [";
+    for (auto &i: this->shift_register_1) {
+        std::cout << i;
+    }
+    std::cout << "]\t";
+
+    std::cout << "Shift Register 2: [";
+    for (auto &i: this->shift_register_2) {
+        std::cout << i;
+    }
+    std::cout << "]";
+
+}
+
+void Satellite::printChipSequence() const {
+    std::cout << "Chip Sequence: ";
+    for (auto &i: chip_sequence) {
+        std::cout << i;
     }
 }
 
-void Satellite::printRegisters() {
-    std::cout << "["
-              << std::setw(2) << std::setfill(' ') << register_1 + 1
-              << ", "
-              << std::setw(2) << std::setfill(' ') << register_2 + 1
-              << "]";
+u_short Satellite::advanceShiftRegister_1() {
+    // XOR the 3rd and 10th bit
+    u_short new_bit_sr1 = shift_register_1[2] ^ shift_register_1[9];
+    // Shift all bits to the right
+    for (int i = shift_register_1.size() - 1; i > 0; i--) {
+        shift_register_1[i] = shift_register_1[i - 1];
+    }
+    // Set the first bit to the new bit
+    shift_register_1[0] = new_bit_sr1;
+    return new_bit_sr1;
+}
+
+u_short Satellite::advanceShiftRegister_2() {
+    // XOR the bits   2, 3, 6, 8, 9 and 10
+    // array position 1, 2, 5, 7, 8 and 9
+    u_short new_bit_sr2 = shift_register_2[1] ^ shift_register_2[2] ^ shift_register_2[5] ^ shift_register_2[7] ^
+                          shift_register_2[8] ^ shift_register_2[9];
+    // Shift all bits to the right
+    for (int i = shift_register_2.size() - 1; i > 0; i--) {
+        shift_register_2[i] = shift_register_2[i - 1];
+    }
+    // Set the first bit to the new bit
+    shift_register_2[0] = new_bit_sr2;
+    return new_bit_sr2;
+}
+
+ushort Satellite::getNextChipSequenceValue() {
+    //fetch last value from shift register 1
+    u_short last_bit_sr1 = shift_register_1[9];
+    //fetch regPos_1 value from shift register 2
+    u_short regBit_1 = shift_register_2[regPos_1];
+    //fetch regPos_2 value from shift register 2
+    u_short regBit_2 = shift_register_2[regPos_2];
+
+    // advance shift register 1
+    advanceShiftRegister_1();
+    // advance shift register 2
+    advanceShiftRegister_2();
+
+    //this->printShiftRegisters();
+    //std::cout << std::endl;
+    // XOR the bits and return value
+    return (regBit_1 ^ regBit_2) ^ last_bit_sr1;
+}
+
+void Satellite::initializeChipSequence() {
+    for (int i = 0; i < chip_sequence.size(); i++) {
+        chip_sequence[i] = getNextChipSequenceValue();
+    }
+
+}
+
+bool Satellite::chipSequenceStartsWith(const std::array<u_short, 12> &sequence) const {
+    for (int i = 0; i < sequence.size(); i++) {
+        if (chip_sequence[i] != sequence[i]) {
+            return false;
+        }
+    }
+    return true;
 }
