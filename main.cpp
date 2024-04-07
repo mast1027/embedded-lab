@@ -2,13 +2,16 @@
 #include <iomanip>
 #include <fstream>
 #include <vector>
+#include <sstream>
 #include "SatelliteNetwork.h"
 #include "globals.h"
 
 int main(int argc, char *argv[]) {
     // Setup Satellite Network
+    SatelliteNetwork network = SatelliteNetwork();
+
     if (DEBUG_MODE) {
-        for (int i = 0; i < SatelliteNetwork::getNumSatellites(); i++) {
+        for (int i = 0; i < network.getNumSatellites(); i++) {
             std::cout << "Satellite "
                       << std::setw(2)    // Set the width to 2 characters
                       << std::setfill(' ') // Fill with ' ' if the number has less than 2 characters
@@ -44,8 +47,8 @@ int main(int argc, char *argv[]) {
     if (DEBUG_MODE) {
         // print parsed receivedData
         std::cout << "Parsed receivedData[" << receivedData.size() << "]:" << std::endl;
-        for (int i: receivedData) {
-            std::cout << i << " ";
+        for (int i = 0; i < receivedData.size(); i++) {
+            std::cout << receivedData[i] << " ";
         }
         std::cout << std::endl;
     }

@@ -35,7 +35,9 @@ public:
 
     Satellite(u_short regPos_1, u_short regPos_2);
 
-    [[nodiscard]] const std::array<u_short, 1023> &getChipSequence() const;
+    u_short shiftRegisterNext();
+
+    const std::array<u_short, 1023> &getChipSequence() const;
 
     void printRegistersPositions() const;
 
@@ -43,7 +45,7 @@ public:
 
     void printChipSequence() const;
 
-    [[nodiscard]] bool chipSequenceStartsWith(const std::array<u_short, 12> &sequence) const;
+    bool chipSequenceStartsWith(const std::array<u_short, 12> &sequence) const;
 };
 
 
