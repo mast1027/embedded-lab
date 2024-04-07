@@ -12,17 +12,20 @@
 class SatelliteNetwork {
 private:
     static const int num_satellites = 24;
-    static Satellite satellite_array[num_satellites];
+    Satellite satellite_array[num_satellites];
 
 public:
     // Constructor
     SatelliteNetwork();
 
-    static void initializeSatellites();
+    void initializeSatellites();
 
-    static Satellite *getSatellite(size_t n);
+    Satellite *getSatellite(size_t n);
 
     [[nodiscard]] static int getNumSatellites();
+
+    // cross-correlate all satellites and return the satellite with the highest correlation
+    std::vector<Satellite *> getSatellitesWithHighestCorrelation();
 };
 
 
