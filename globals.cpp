@@ -4,4 +4,4 @@
 
 #include "globals.h"
 
-bool DEBUG_MODE = true;
+bool DEBUG_MODE = false;
