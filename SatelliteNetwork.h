@@ -22,7 +22,7 @@ public:
 
     static Satellite *getSatellite(size_t n);
 
-    int getNumSatellites() const;
+    [[nodiscard]] static int getNumSatellites();
 };
 
 

@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <fstream>
 #include <vector>
-#include <sstream>
 #include "SatelliteNetwork.h"
 #include "globals.h"
 
@@ -47,8 +46,8 @@ int main(int argc, char *argv[]) {
     if (DEBUG_MODE) {
         // print parsed receivedData
         std::cout << "Parsed receivedData[" << receivedData.size() << "]:" << std::endl;
-        for (int i = 0; i < receivedData.size(); i++) {
-            std::cout << receivedData[i] << " ";
+        for (int i: receivedData) {
+            std::cout << i << " ";
         }
         std::cout << std::endl;
     }

@@ -18,11 +18,6 @@ Satellite::Satellite(u_short reg1, u_short reg2) : regPos_1(reg1), regPos_2(reg2
 }
 
 
-// Getter for chip_sequence
-const std::array<unsigned short, 1023> &Satellite::getChipSequence() const {
-    return chip_sequence;
-}
-
 void Satellite::printRegistersPositions() const {
     std::cout << "["
               << std::setw(2) << std::setfill(' ') << regPos_1 + 1
@@ -57,7 +52,7 @@ u_short Satellite::advanceShiftRegister_1() {
     // XOR the 3rd and 10th bit
     u_short new_bit_sr1 = shift_register_1[2] ^ shift_register_1[9];
     // Shift all bits to the right
-    for (int i = shift_register_1.size() - 1; i > 0; i--) {
+    for (u_long i = shift_register_1.size() - 1; i > 0; i--) {
         shift_register_1[i] = shift_register_1[i - 1];
     }
     // Set the first bit to the new bit
@@ -71,7 +66,7 @@ u_short Satellite::advanceShiftRegister_2() {
     u_short new_bit_sr2 = shift_register_2[1] ^ shift_register_2[2] ^ shift_register_2[5] ^ shift_register_2[7] ^
                           shift_register_2[8] ^ shift_register_2[9];
     // Shift all bits to the right
-    for (int i = shift_register_2.size() - 1; i > 0; i--) {
+    for (u_long i = shift_register_2.size() - 1; i > 0; i--) {
         shift_register_2[i] = shift_register_2[i - 1];
     }
     // Set the first bit to the new bit
@@ -99,8 +94,8 @@ ushort Satellite::getNextChipSequenceValue() {
 }
 
 void Satellite::initializeChipSequence() {
-    for (int i = 0; i < chip_sequence.size(); i++) {
-        chip_sequence[i] = getNextChipSequenceValue();
+    for (unsigned short &i: chip_sequence) {
+        i = getNextChipSequenceValue();
     }
 
 }
