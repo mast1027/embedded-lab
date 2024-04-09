@@ -13,6 +13,8 @@
 #include <vector>
 #include "globals.h"
 
+typedef unsigned short u_short;
+
 struct CorrelationResult {
     int delta;
     int correlationValue;
@@ -31,7 +33,7 @@ private:
 
     u_short advanceShiftRegister_2();   // advance shift register 2 by one step
 
-    ushort getNextChipSequenceValue();  // get next chip sequence value (gold-code generator)
+    u_short getNextChipSequenceValue();  // get next chip sequence value (gold-code generator)
 
     void initializeChipSequence();      // initialize chip sequence
 

@@ -5,6 +5,9 @@
 #include <iomanip>
 #include "Satellite.h"
 
+typedef unsigned short u_short;
+typedef unsigned long u_long;
+
 // Constructors
 Satellite::Satellite() : regPos_1(0), regPos_2(0),
                          shift_register_1{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, shift_register_2{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -80,7 +83,7 @@ u_short Satellite::advanceShiftRegister_2() {
 }
 
 // get next chip sequence value (gold-code generator)
-ushort Satellite::getNextChipSequenceValue() {
+u_short Satellite::getNextChipSequenceValue() {
     //fetch last value from shift register 1
     u_short last_bit_sr1 = shift_register_1[9];
     //fetch regPos_1 value from shift register 2
