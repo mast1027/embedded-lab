@@ -85,19 +85,23 @@ int SatelliteNetwork::getNumSatellites() {
 // cross-correlate all satellites and return the satellite with the highest correlation
 std::vector<Satellite *> SatelliteNetwork::getSatellitesWithHighestCorrelation() {
     std::vector<Satellite *> satellitesWithHighestCorrelation;
-    int highestCorrelationValue = 0; // initial value
+    int n = getSatellite(0)->getRegisterLength();
+    double exponent = (n + 2) / 2.0;
+    double delta_one_satellite = pow(-2, exponent) - 1;
+    double max_delta = delta_one_satellite * satellites_to_search;
+    double threshold = getSatellite(0)->getChipSequenceLength() - max_delta;
+
+    if (DEBUG_MODE) {
+        std::cout << "Threshold: " << threshold << std::endl;
+    }
 
     // iterate over all satellites
     for (int i = 0; i < num_satellites; ++i) {
         Satellite *sat = getSatellite(i);
         CorrelationResult result = sat->getLastCorrelationResult();
-        if (abs(result.correlationValue) > abs(highestCorrelationValue)) {
-            highestCorrelationValue = result.correlationValue;
-            satellitesWithHighestCorrelation.clear();
+        if (abs(result.correlationValue) > threshold) {
             satellitesWithHighestCorrelation.push_back(sat);
-        } else if (abs(result.correlationValue) == abs(highestCorrelationValue)) {
-            satellitesWithHighestCorrelation.push_back(
-                    sat); // Add the satellite to the vector if it has the same correlation value
+
         }
     }
 

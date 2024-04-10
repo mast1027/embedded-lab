@@ -90,13 +90,17 @@ int main(int argc, char *argv[]) {
 
         if (bestSatellite->getLastCorrelationResult().correlationValue > 0) {
             std::cout << " has sent bit 1 (delta = " << bestSatellite->getLastCorrelationResult().delta
-                      << ")" << std::endl;
+                      << ")";
         } else if (bestSatellite->getLastCorrelationResult().correlationValue < 0) {
             std::cout << " has sent bit 0 (delta = " << bestSatellite->getLastCorrelationResult().delta
-                      << ")" << std::endl;
+                      << ")";
         } else {
             std::cout << "No correlation found." << std::endl;
         }
+        if (DEBUG_MODE) {
+            std::cout << "\tCorrelation Value = " << bestSatellite->getLastCorrelationResult().correlationValue;
+        }
+        std::cout << std::endl;
     }
 
 

@@ -49,7 +49,7 @@ void Satellite::printChipSequence() const {
     std::cout << "Chip Sequence: ";
     for (auto &i: chip_sequence) {
         tmp = i;
-        if (tmp < 0){
+        if (tmp < 0) {
             tmp = 0;
         }
         std::cout << tmp;
@@ -110,7 +110,7 @@ void Satellite::initializeChipSequence() {
         if (tmp == 0) {
             i = -1;
         } else {
-            i = tmp ;
+            i = tmp;
         }
     }
 
@@ -163,4 +163,12 @@ CorrelationResult Satellite::getLastCorrelationResult() {
 // get satellite id number
 short Satellite::getSatelliteId() const {
     return this->satellite_id;
+}
+
+int Satellite::getRegisterLength() {
+    return register_length;
+}
+
+int Satellite::getChipSequenceLength() {
+    return chip_sequence_length;
 }

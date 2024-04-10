@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include "globals.h"
+#include <cmath>
 
 struct CorrelationResult {
     int delta;
@@ -23,9 +24,11 @@ private:
     u_short regPos_1;
     u_short regPos_2;
     short satellite_id;
-    std::array<u_short, 10> shift_register_1;
-    std::array<u_short, 10> shift_register_2;
-    std::array<short, 1023> chip_sequence;
+    static const int register_length = 10;
+    static const int chip_sequence_length = 1023;
+    std::array<u_short, register_length> shift_register_1;
+    std::array<u_short, register_length> shift_register_2;
+    std::array<short, chip_sequence_length> chip_sequence;
 
     u_short advanceShiftRegister_1();   // advance shift register 1 by one step
 
@@ -43,6 +46,10 @@ public:
     Satellite();
 
     Satellite(short satellite_id, u_short regPos_1, u_short regPos_2);
+
+    static int getRegisterLength(); // get register length
+
+    static int getChipSequenceLength(); // get chip sequence length
 
     void printRegistersPositions() const; // print register positions for gold-code generator
 
