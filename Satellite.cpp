@@ -45,9 +45,14 @@ void Satellite::printShiftRegisters() const {
 
 // print chip sequence
 void Satellite::printChipSequence() const {
+    short tmp = 0;
     std::cout << "Chip Sequence: ";
     for (auto &i: chip_sequence) {
-        std::cout << i;
+        tmp = i;
+        if (tmp < 0){
+            tmp = 0;
+        }
+        std::cout << tmp;
     }
 }
 
@@ -80,7 +85,7 @@ u_short Satellite::advanceShiftRegister_2() {
 }
 
 // get next chip sequence value (gold-code generator)
-ushort Satellite::getNextChipSequenceValue() {
+short Satellite::getNextChipSequenceValue() {
     //fetch last value from shift register 1
     u_short last_bit_sr1 = shift_register_1[9];
     //fetch regPos_1 value from shift register 2
@@ -99,16 +104,27 @@ ushort Satellite::getNextChipSequenceValue() {
 
 // initialize chip sequence (gold-code generator)
 void Satellite::initializeChipSequence() {
-    for (unsigned short &i: chip_sequence) {
-        i = getNextChipSequenceValue();
+    unsigned short tmp = 0;
+    for (short &i: chip_sequence) {
+        tmp = getNextChipSequenceValue();
+        if (tmp == 0) {
+            i = -1;
+        } else {
+            i = tmp ;
+        }
     }
 
 }
 
 // check if chip sequence starts with given sequence, used for testing
 bool Satellite::chipSequenceStartsWith(const std::array<u_short, 12> &sequence) const {
+    short tmp = 0;
     for (int i = 0; i < sequence.size(); i++) {
-        if (chip_sequence[i] != sequence[i]) {
+        tmp = sequence[i];
+        if (tmp == 0) {
+            tmp = -1;
+        }
+        if (chip_sequence[i] != tmp) {
             return false;
         }
     }
@@ -126,7 +142,8 @@ void Satellite::crossCorrelate(const std::vector<int> &receivedData) {
         // iterate over the chip sequence
         for (int i = 0; i < this->chip_sequence.size(); ++i) {
             // use modulo to wrap around the received data
-            int receivedIndex = (shift + i) % receivedData.size();
+            int receivedIndex = (shift + i) % receivedData.size();  // TODO: optimize mod operator?
+            // ToDo: doppelte sequenz und nur einmal durchschiften
             sum += receivedData[receivedIndex] * this->chip_sequence[i];
         }
         // check if the current shift has a higher correlation than the previous maximum

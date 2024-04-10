@@ -25,13 +25,13 @@ private:
     short satellite_id;
     std::array<u_short, 10> shift_register_1;
     std::array<u_short, 10> shift_register_2;
-    std::array<u_short, 1023> chip_sequence;
+    std::array<short, 1023> chip_sequence;
 
     u_short advanceShiftRegister_1();   // advance shift register 1 by one step
 
     u_short advanceShiftRegister_2();   // advance shift register 2 by one step
 
-    ushort getNextChipSequenceValue();  // get next chip sequence value (gold-code generator)
+    short getNextChipSequenceValue();  // get next chip sequence value (gold-code generator)
 
     void initializeChipSequence();      // initialize chip sequence
 
