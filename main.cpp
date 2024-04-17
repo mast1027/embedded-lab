@@ -4,7 +4,7 @@
 #include <vector>
 #include "SatelliteNetwork.h"
 #include "globals.h"
-# include "timer.h"
+#include "timer.h"
 
 int main(int argc, char *argv[]) {
     Timer timer("main");
