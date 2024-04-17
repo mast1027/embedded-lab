@@ -4,8 +4,10 @@
 #include <vector>
 #include "SatelliteNetwork.h"
 #include "globals.h"
+# include "timer.h"
 
 int main(int argc, char *argv[]) {
+    Timer timer("main");
     // read commandline arguments
     if (argc < 2) {
         std::cerr << "Error: No file specified. Please provide a file path as an argument." << std::endl;
@@ -44,12 +46,14 @@ int main(int argc, char *argv[]) {
     }
 
     // parse file
+    Timer parseFile = Timer("parseFile");
     std::vector<int> receivedData; // Vector to store parsed receivedData
     int number;
     while (file >> number) { // Read receivedData from the file
         receivedData.push_back(number); // Add the number to the vector
     }
     file.close(); // Close the file
+    parseFile.~Timer(); // Stop the timer
 
     // print received data
     if (DEBUG_MODE) {
@@ -64,6 +68,7 @@ int main(int argc, char *argv[]) {
     if (DEBUG_MODE) {
         std::cout << "############ Correlation Results ###########" << std::endl;
     }
+    Timer crossCorrelate = Timer("crossCorrelate");
     // cross-correlate all satellites
     for (int i = 0; i < network.getNumSatellites(); i++) {
         //ToDo: optimize this part by parallelizeing the for loop on n cores
@@ -75,11 +80,12 @@ int main(int argc, char *argv[]) {
                       << " Delta: " << network.getSatellite(i)->getLastCorrelationResult().delta << std::endl;
         }
     }
+    crossCorrelate.~Timer(); // Stop the timer
     if (DEBUG_MODE) {
         std::cout << std::endl;
     }
 
-    // get satellites with highest correlation
+    // get satellites with the highest correlation
     std::vector<Satellite *> bestSatellites = network.getSatellitesWithHighestCorrelation();
     // print results like in the assignment
     for (auto &bestSatellite: bestSatellites) {

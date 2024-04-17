@@ -10,4 +10,6 @@ add_executable(embedded_lab main.cpp
         SatelliteNetwork.h
         globals.h
         globals.cpp
-        globals.h)
+        globals.h
+        timer.cpp
+        timer.h)

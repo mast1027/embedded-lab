@@ -13,6 +13,7 @@
 #include <vector>
 #include "globals.h"
 #include <cmath>
+#include "timer.h"
 
 struct CorrelationResult {
     int delta;

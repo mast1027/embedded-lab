@@ -11,6 +11,7 @@ SatelliteNetwork::SatelliteNetwork() {
 
 // initialize all satellites, test some if DEBUG_MODE is enabled
 void SatelliteNetwork::initializeSatellites() {
+    Timer timer("SatelliteNetwork::initializeSatellites");
     std::array<u_short, 12> check_array{};
 
     satellite_array[0] = Satellite(0, 1, 5);
@@ -84,6 +85,7 @@ int SatelliteNetwork::getNumSatellites() {
 
 // cross-correlate all satellites and return the satellite with the highest correlation
 std::vector<Satellite *> SatelliteNetwork::getSatellitesWithHighestCorrelation() {
+    Timer timer("SatelliteNetwork::getSatellitesWithHighestCorrelation");
     std::vector<Satellite *> satellitesWithHighestCorrelation;
     int n = getSatellite(0)->getRegisterLength();
     double exponent = (n + 2) / 2.0;

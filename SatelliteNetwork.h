@@ -8,6 +8,7 @@
 
 #include "Satellite.h"
 #include "globals.h"
+#include "timer.h"
 
 class SatelliteNetwork {
 private:

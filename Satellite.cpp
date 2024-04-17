@@ -133,6 +133,7 @@ bool Satellite::chipSequenceStartsWith(const std::array<u_short, 12> &sequence) 
 
 // cross-correlate satellite with received data
 void Satellite::crossCorrelate(const std::vector<int> &receivedData) {
+    Timer timer("Satellite::crossCorrelate[" + std::to_string(this->satellite_id) + "]");
     int maxCorrelation = 0; // initial value for the maximum correlation
     int bestShift = 0;
 
