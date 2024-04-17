@@ -18,4 +18,12 @@ Die Zeitmessung intern wird via `Timer::Timer` realisiert.
 
 # 2. Benchmarking
 
+## Optimize `const bool for DEBUG_MODE`
+
+## Use only primitive data types
+
+## Pre-Calculation of `threshold` for `SatelliteNetwork::getSatellitesWithHighestCorrelation`
+
+## Use double-sequence storage for `Satellite::crossCorrelate`
+
 # 3. Benchmarking mit [perfbench.com](https://perfbench.com/)
