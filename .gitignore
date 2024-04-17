@@ -3,3 +3,4 @@
 build
 *.exe
 cmake*
+combined_main.cpp
