@@ -1,29 +1,29 @@
 # 1. Methoden zur Laufzeitanalyse
 
-## Laufzeitmessung
+## 1.1. Laufzeitmessung
 
 Die Zeitmessung intern wird via `Timer::Timer` realisiert.
 
-## Profiling
+## 1.2. Profiling
 
-### Profiling mit `gprof`
+### 1.2.1 Profiling mit `gprof`
 
-### Profiling mit `perf`
+### 1.2.2 Profiling mit `perf`
 
-### Profiling mit `valgrind`
+### 1.2.3 Profiling mit `valgrind`
 
-### Profiling mit `gperftools`
+### 1.2.4 Profiling mit `gperftools`
 
-### Profiling mit `callgrind`
+### 1.2.5 Profiling mit `callgrind`
 
 # 2. Benchmarking
 
-## Optimize `const bool for DEBUG_MODE`
+## 2.1 Optimize `const bool for DEBUG_MODE`
 
-## Use only primitive data types
+## 2.2 Use only primitive data types
 
-## Pre-Calculation of `threshold` for `SatelliteNetwork::getSatellitesWithHighestCorrelation`
+## 2.3 Pre-Calculation of `threshold` for `SatelliteNetwork::getSatellitesWithHighestCorrelation`
 
-## Use double-sequence storage for `Satellite::crossCorrelate`
+## 2.4 Use double-sequence storage for `Satellite::crossCorrelate`
 
 # 3. Benchmarking mit [perfbench.com](https://perfbench.com/)
