@@ -135,6 +135,26 @@ Kaum zu berechnen, da die Laufzeit der Funktionen nach den Änderungen bei 0.0 l
 
 ## 2.3 Pre-Calculation of `threshold` for `SatelliteNetwork::getSatellitesWithHighestCorrelation`
 
+Die `threshold`-Variable wurde in der `SatelliteNetwork`-Klasse als `double` definiert und im Konstruktor berechnet.
+
+Dies is in Commit [e8531b1](https://github.com/mast1027/embedded-lab/commit/e8531b1fa6f622b8016b34b53fc150f4efb95c82) zu
+sehen.
+
+### Verbesserung
+
+`perf`-Vergleich:
+Kaum Verbesserungen da natürlich die Laufzeitverhältnisse gleich bleiben.
+
+`gprof`-Vergleich:
+Kaum zu berechnen, da die Laufzeit der Funktionen nach den Änderungen bei 0.0 liegt.
+
+Interner Vergleich:
+`SatelliteNetwork::getSatellitesWithHighestCorrelation: 9 microseconds`
+vs. `SatelliteNetwork::getSatellitesWithHighestCorrelation: 3 microseconds.` , d.h. eine Verbesserung
+um `6 microseconds` und um Faktor `3` zur vorherigen Laufzeit bzw. [2.3](#22-use-only-primitive-data-types).
+
+Im Gesamten jedoch kaum nennenswert.
+
 ## 2.4 Use double-sequence storage for `Satellite::crossCorrelate`
 
 # 3. Benchmarking mit [perfbench.com](https://perfbench.com/)
