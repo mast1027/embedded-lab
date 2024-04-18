@@ -41,11 +41,13 @@ int main(int argc, char *argv[]) {
 
     // parse file
     Timer parseFile = Timer("parseFile");
-    int receivedData[RECEIVED_DATA_LENGTH] = {0}; // Array to store receivedData
+    int receivedData[RECEIVED_DATA_LENGTH * 2] = {0}; // Array to store receivedData
     int number;
     int i = 0;
     while (file >> number) { // Read receivedData from the file
-        receivedData[i++] = number; // Store the receivedData in the array
+        receivedData[i] = number; // Store the receivedData in the array
+        receivedData[i + RECEIVED_DATA_LENGTH] = number;
+        i++;
     }
     file.close(); // Close the file
     parseFile.~Timer(); // Stop the timer

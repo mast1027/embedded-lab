@@ -127,8 +127,7 @@ void Satellite::crossCorrelate(const int receivedData[RECEIVED_DATA_LENGTH]) {
         // iterate over the chip sequence
         for (int i = 0; i < register_length; ++i) {
             // use modulo to wrap around the received data
-            int receivedIndex = (shift + i) % RECEIVED_DATA_LENGTH;  // TODO: optimize mod operator?
-            // ToDo: doppelte sequenz und nur einmal durchschiften
+            int receivedIndex = shift + i;
             sum += receivedData[receivedIndex] * this->chip_sequence[i];
         }
         // check if the current shift has a higher correlation than the previous maximum
