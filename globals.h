@@ -7,6 +7,6 @@
 
 
 const extern bool DEBUG_MODE;
-
+const int RECEIVED_DATA_LENGTH = 1023;
 
 #endif //EMBEDDED_LAB_GLOBALS_H

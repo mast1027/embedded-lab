@@ -6,11 +6,7 @@
 #define EMBEDDED_LAB_SATELLITE_H
 
 
-#include <array>
-#include <cstddef>
-#include <cstdlib>
 #include <iostream>
-#include <vector>
 #include "globals.h"
 #include <cmath>
 #include "timer.h"
@@ -22,18 +18,18 @@ struct CorrelationResult {
 
 class Satellite {
 private:
-    u_short regPos_1;
-    u_short regPos_2;
+    unsigned short regPos_1;
+    unsigned short regPos_2;
     short satellite_id;
     static const int register_length = 10;
     static const int chip_sequence_length = 1023;
-    std::array<u_short, register_length> shift_register_1;
-    std::array<u_short, register_length> shift_register_2;
-    std::array<short, chip_sequence_length> chip_sequence;
+    unsigned short shift_register_1[register_length];
+    unsigned short shift_register_2[register_length];
+    unsigned short chip_sequence[chip_sequence_length];
 
-    u_short advanceShiftRegister_1();   // advance shift register 1 by one step
+    unsigned short advanceShiftRegister_1();   // advance shift register 1 by one step
 
-    u_short advanceShiftRegister_2();   // advance shift register 2 by one step
+    unsigned short advanceShiftRegister_2();   // advance shift register 2 by one step
 
     short getNextChipSequenceValue();  // get next chip sequence value (gold-code generator)
 
@@ -46,7 +42,7 @@ public:
     // Constructors
     Satellite();
 
-    Satellite(short satellite_id, u_short regPos_1, u_short regPos_2);
+    Satellite(short satellite_id, unsigned short regPos_1, unsigned short regPos_2);
 
     static int getRegisterLength(); // get register length
 
@@ -60,11 +56,8 @@ public:
 
     void printChipSequence() const;
 
-    // check if chip sequence starts with given sequence
-    [[nodiscard]] bool chipSequenceStartsWith(const std::array<u_short, 12> &sequence) const;
-
     [[maybe_unused]] void
-    crossCorrelate(const std::vector<int> &receivedData); // cross-correlate satellite with received data
+    crossCorrelate(const int receivedData[RECEIVED_DATA_LENGTH]); // cross-correlate satellite with received data
 
     CorrelationResult getLastCorrelationResult(); // get last correlation result
 

@@ -27,7 +27,7 @@ public:
     [[nodiscard]] static int getNumSatellites();
 
     // cross-correlate all satellites and return the satellite with the highest correlation
-    std::vector<Satellite *> getSatellitesWithHighestCorrelation();
+    Satellite *getSatellitesWithHighestCorrelation();
 };
 
 

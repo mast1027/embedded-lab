@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <vector>
 #include "SatelliteNetwork.h"
 #include "globals.h"
 #include "timer.h"
@@ -42,10 +41,11 @@ int main(int argc, char *argv[]) {
 
     // parse file
     Timer parseFile = Timer("parseFile");
-    std::vector<int> receivedData; // Vector to store parsed receivedData
+    int receivedData[RECEIVED_DATA_LENGTH] = {0}; // Array to store receivedData
     int number;
+    int i = 0;
     while (file >> number) { // Read receivedData from the file
-        receivedData.push_back(number); // Add the number to the vector
+        receivedData[i++] = number; // Store the receivedData in the array
     }
     file.close(); // Close the file
     parseFile.~Timer(); // Stop the timer
@@ -81,9 +81,9 @@ int main(int argc, char *argv[]) {
     }
 
     // get satellites with the highest correlation
-    std::vector<Satellite *> bestSatellites = network.getSatellitesWithHighestCorrelation();
-    // print results like in the assignment
-    for (auto &bestSatellite: bestSatellites) {
+    Satellite *bestSatellites = network.getSatellitesWithHighestCorrelation();
+    for (int i = 0; i < 4; i++) {
+        auto bestSatellite = &bestSatellites[i];
         std::cout << "Satellite "
                   << std::setw(2)
                   << std::setfill(' ')
@@ -103,7 +103,5 @@ int main(int argc, char *argv[]) {
         }
         std::cout << std::endl;
     }
-
-
     return 0;
 }
