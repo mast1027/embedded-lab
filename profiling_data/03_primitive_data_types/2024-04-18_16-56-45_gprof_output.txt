@@ -1,0 +1,107 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+ no time accumulated
+
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+  0.00      0.00     0.00       31     0.00     0.00  Timer::~Timer()
+  0.00      0.00     0.00       28     0.00     0.00  Satellite::Satellite()
+  0.00      0.00     0.00       25     0.00     0.00  SatelliteNetwork::getNumSatellites()
+  0.00      0.00     0.00       24     0.00     0.00  SatelliteNetwork::getSatellite(unsigned long)
+  0.00      0.00     0.00       24     0.00     0.00  Timer::Timer(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  0.00      0.00     0.00       24     0.00     0.00  Satellite::crossCorrelate(int const*)
+  0.00      0.00     0.00       24     0.00     0.00  Satellite::initializeChipSequence()
+  0.00      0.00     0.00       24     0.00     0.00  Satellite::Satellite(short, unsigned short, unsigned short)
+  0.00      0.00     0.00       14     0.00     0.00  Satellite::getLastCorrelationResult()
+  0.00      0.00     0.00        5     0.00     0.00  Timer::Timer(char const*)
+  0.00      0.00     0.00        4     0.00     0.00  Satellite::getSatelliteId() const
+  0.00      0.00     0.00        1     0.00     0.00  SatelliteNetwork::initializeSatellites()
+  0.00      0.00     0.00        1     0.00     0.00  SatelliteNetwork::getSatellitesWithHighestCorrelation()
+  0.00      0.00     0.00        1     0.00     0.00  SatelliteNetwork::SatelliteNetwork()
+  0.00      0.00     0.00        1     0.00     0.00  Satellite::getRegisterLength()
+  0.00      0.00     0.00        1     0.00     0.00  Satellite::getChipSequenceLength()
+
+			Call graph
+
+
+granularity: each sample hit covers 4 byte(s) no time propagated
+
+index % time    self  children    called     name
+                0.00    0.00       1/31          SatelliteNetwork::initializeSatellites() [19]
+                0.00    0.00       1/31          SatelliteNetwork::getSatellitesWithHighestCorrelation() [20]
+                0.00    0.00       5/31          main [6]
+                0.00    0.00      24/31          Satellite::crossCorrelate(int const*) [13]
+[8]      0.0    0.00    0.00      31         Timer::~Timer() [8]
+-----------------------------------------------
+                0.00    0.00       4/28          SatelliteNetwork::getSatellitesWithHighestCorrelation() [20]
+                0.00    0.00      24/28          SatelliteNetwork::SatelliteNetwork() [21]
+[9]      0.0    0.00    0.00      28         Satellite::Satellite() [9]
+-----------------------------------------------
+                0.00    0.00      25/25          main [6]
+[10]     0.0    0.00    0.00      25         SatelliteNetwork::getNumSatellites() [10]
+-----------------------------------------------
+                0.00    0.00      24/24          main [6]
+[11]     0.0    0.00    0.00      24         SatelliteNetwork::getSatellite(unsigned long) [11]
+-----------------------------------------------
+                0.00    0.00      24/24          Satellite::crossCorrelate(int const*) [13]
+[12]     0.0    0.00    0.00      24         Timer::Timer(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [12]
+-----------------------------------------------
+                0.00    0.00      24/24          main [6]
+[13]     0.0    0.00    0.00      24         Satellite::crossCorrelate(int const*) [13]
+                0.00    0.00      24/24          Timer::Timer(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [12]
+                0.00    0.00      24/31          Timer::~Timer() [8]
+-----------------------------------------------
+                0.00    0.00      24/24          SatelliteNetwork::initializeSatellites() [19]
+[14]     0.0    0.00    0.00      24         Satellite::initializeChipSequence() [14]
+-----------------------------------------------
+                0.00    0.00      24/24          SatelliteNetwork::initializeSatellites() [19]
+[15]     0.0    0.00    0.00      24         Satellite::Satellite(short, unsigned short, unsigned short) [15]
+-----------------------------------------------
+                0.00    0.00       4/14          SatelliteNetwork::getSatellitesWithHighestCorrelation() [20]
+                0.00    0.00      10/14          main [6]
+[16]     0.0    0.00    0.00      14         Satellite::getLastCorrelationResult() [16]
+-----------------------------------------------
+                0.00    0.00       1/5           SatelliteNetwork::initializeSatellites() [19]
+                0.00    0.00       1/5           SatelliteNetwork::getSatellitesWithHighestCorrelation() [20]
+                0.00    0.00       3/5           main [6]
+[17]     0.0    0.00    0.00       5         Timer::Timer(char const*) [17]
+-----------------------------------------------
+                0.00    0.00       4/4           main [6]
+[18]     0.0    0.00    0.00       4         Satellite::getSatelliteId() const [18]
+-----------------------------------------------
+                0.00    0.00       1/1           main [6]
+[19]     0.0    0.00    0.00       1         SatelliteNetwork::initializeSatellites() [19]
+                0.00    0.00      24/24          Satellite::initializeChipSequence() [14]
+                0.00    0.00      24/24          Satellite::Satellite(short, unsigned short, unsigned short) [15]
+                0.00    0.00       1/5           Timer::Timer(char const*) [17]
+                0.00    0.00       1/31          Timer::~Timer() [8]
+-----------------------------------------------
+                0.00    0.00       1/1           main [6]
+[20]     0.0    0.00    0.00       1         SatelliteNetwork::getSatellitesWithHighestCorrelation() [20]
+                0.00    0.00       4/14          Satellite::getLastCorrelationResult() [16]
+                0.00    0.00       4/28          Satellite::Satellite() [9]
+                0.00    0.00       1/5           Timer::Timer(char const*) [17]
+                0.00    0.00       1/1           Satellite::getRegisterLength() [22]
+                0.00    0.00       1/1           Satellite::getChipSequenceLength() [23]
+                0.00    0.00       1/31          Timer::~Timer() [8]
+-----------------------------------------------
+                0.00    0.00       1/1           main [6]
+[21]     0.0    0.00    0.00       1         SatelliteNetwork::SatelliteNetwork() [21]
+                0.00    0.00      24/28          Satellite::Satellite() [9]
+-----------------------------------------------
+                0.00    0.00       1/1           SatelliteNetwork::getSatellitesWithHighestCorrelation() [20]
+[22]     0.0    0.00    0.00       1         Satellite::getRegisterLength() [22]
+-----------------------------------------------
+                0.00    0.00       1/1           SatelliteNetwork::getSatellitesWithHighestCorrelation() [20]
+[23]     0.0    0.00    0.00       1         Satellite::getChipSequenceLength() [23]
+-----------------------------------------------
+
+Index by function name
+
+  [11] SatelliteNetwork::getSatellite(unsigned long) [12] Timer::Timer(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [16] Satellite::getLastCorrelationResult()
+  [10] SatelliteNetwork::getNumSatellites() [8] Timer::~Timer() [15] Satellite::Satellite(short, unsigned short, unsigned short)
+  [19] SatelliteNetwork::initializeSatellites() [13] Satellite::crossCorrelate(int const*) [9] Satellite::Satellite()
+  [20] SatelliteNetwork::getSatellitesWithHighestCorrelation() [22] Satellite::getRegisterLength() [18] Satellite::getSatelliteId() const
+  [21] SatelliteNetwork::SatelliteNetwork() [23] Satellite::getChipSequenceLength()
+  [17] Timer::Timer(char const*) [14] Satellite::initializeChipSequence()

@@ -99,6 +99,40 @@ Interner Vergleich:
 
 ## 2.2 Use only primitive data types
 
+Alle nicht primitive Datentypen wurden durch primitive Datentypen ersetzt.
+
+Dies is in Commit [08f257c](https://github.com/mast1027/embedded-lab/commit/08f257c1e818d19ffa321025ddd2494e088eccce) zu
+sehen.
+
+### Verbesserung
+
+`perf`-Vergleich:
+Kaum Verbesserungen da natürlich die Laufzeitverhältnisse gleich bleiben.
+
+```shell
+# Event 'cycles:P'
+#
+# Baseline  Delta Abs  Shared Object      Symbol                                                                      
+# ........  .........  .................  ............................................................................
+#
+              +99.83%  [kernel.kallsyms]  [k] __kmem_cache_alloc_bulk
+     0.00%     +0.17%  [kernel.kallsyms]  [k] native_write_msr
+    97.22%             embedded_lab       [.] Satellite::crossCorrelate(std::vector<int, std::allocator<int> > const&)
+     2.78%             [kernel.kallsyms]  [k] get_page_from_freelist
+```
+
+Interner Vergleich:
+`main: 139611 microseconds.` vs. `main: 487 microseconds.` , d.h. eine Verbesserung um `139124 microseconds` und um
+Faktor `286` zur initialen Laufzeit bzw. [2.1](#21-optimize-const-bool-for-debug_mode).
+
+Das Einlesen der Quelldatei wurde kaum beeinflusst.
+
+`parseFile` und `crossCorrelate` haben einen massiven Performance-Boost erhalten, vermutlich vom Wechsel
+von `std::vector` auf `int[]`.
+
+`gprof`-Vergleich:
+Kaum zu berechnen, da die Laufzeit der Funktionen nach den Änderungen bei 0.0 liegt.
+
 ## 2.3 Pre-Calculation of `threshold` for `SatelliteNetwork::getSatellitesWithHighestCorrelation`
 
 ## 2.4 Use double-sequence storage for `Satellite::crossCorrelate`
