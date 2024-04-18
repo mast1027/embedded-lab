@@ -157,4 +157,24 @@ Im Gesamten jedoch kaum nennenswert.
 
 ## 2.4 Use double-sequence storage for `Satellite::crossCorrelate`
 
+Das Array `receivedData` wurde verdoppelt um die Laufzeit der `crossCorrelate`-Funktion zu verbessern. Durch die
+verdoppelung der Länge des Arrays wird das Berechnen des Shift-Indexes via Modulo-Operationen überflüssig.
+
+Dies is in Commit [7e75d85](https://github.com/mast1027/embedded-lab/commit/7e75d85f3fb20fe539fc4917ce2154d96e8a98b1) zu
+sehen.
+
+`perf`-Vergleich:
+Kaum Verbesserungen da natürlich die Laufzeitverhältnisse gleich bleiben.
+
+`gprof`-Vergleich:
+Kaum zu berechnen, da die Laufzeit der Funktionen nach den Änderungen bei 0.0 liegt.
+
+Interner Vergleich:
+`Satellite::crossCorrelate[X]: 9 microseconds.` vs. `Satellite::crossCorrelate[X]: 3 microseconds.` , d.h. eine
+Verbesserung um `6 microseconds` und um Faktor `3` zur vorherigen Laufzeit
+bzw. [2.4](#23-pre-calculation-of-threshold-for-satellitenetworkgetsatelliteswithhighestcorrelation).
+
+Da dies natürlich für alle 24 Satelliten geschieht verbessert sich die Laufzeit der `crossCorrelate: 242 microseconds.`
+vs. `crossCorrelate: 78 microseconds.`. Dies entspricht einer Verbesserung um `164 microseconds` und um Faktor `3.1`.
+
 # 3. Benchmarking mit [perfbench.com](https://perfbench.com/)
