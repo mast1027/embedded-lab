@@ -12,11 +12,6 @@ int main(int argc, char *argv[]) {
     if (argc < 2) {
         std::cerr << "Error: No file specified. Please provide a file path as an argument." << std::endl;
         return 1; // Return an error code
-    } else if (argc == 3) {
-        std::string debugArg = argv[2];
-        if (debugArg == "-d" || debugArg == "--debug" || debugArg == "-D" || debugArg == "--DEBUG") {
-            DEBUG_MODE = true;
-        }
     }
 
     // Setup Satellite Network

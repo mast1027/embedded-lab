@@ -5,7 +5,7 @@ EXECUTABLE_FOLDER="./cmake-build-release"
 EXECUTABLE="${EXECUTABLE_FOLDER}/embedded_lab"
 INPUT_FILE="satellite_data/gps_sequence_1.txt"
 DATE_PREFIX=$(date +"%Y-%m-%d_%H-%M-%S")
-SUBFOLDER="01_initial"
+SUBFOLDER="02_const_bool_for_DEBUG_MODE"
 PROFILING_DATA_FOLDER="profiling_data/${SUBFOLDER}"
 mkdir -p $PROFILING_DATA_FOLDER
 GPROF_OUTPUT="${PROFILING_DATA_FOLDER}/${DATE_PREFIX}_gprof_output.txt"

@@ -6,7 +6,7 @@
 #define EMBEDDED_LAB_GLOBALS_H
 
 
-extern bool DEBUG_MODE;
+const extern bool DEBUG_MODE;
 
 
 #endif //EMBEDDED_LAB_GLOBALS_H
