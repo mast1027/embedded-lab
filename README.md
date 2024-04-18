@@ -69,6 +69,34 @@ Das Script `./profile.sh` erzeugt die Analysedatei und speichert sie in `profili
 
 ## 2.1 Optimize `const bool for DEBUG_MODE`
 
+Zuerst wurde die `DEBUG_MODE`-Variable in der `globals.*`-Datei als `const bool` definiert. Dies ermöglicht dem
+Compiler,
+die Variable zur Kompilierzeit zu optimieren, da sie nicht mehr geändert werden kann.
+
+Dies is in Commit [0bb55bd](https://github.com/mast1027/embedded-lab/commit/0bb55bd34046d5f741aa47e384e241656bb830c1) zu
+sehen.
+
+### Verbesserung
+
+Keine nennenswerte Verbesserung.
+
+`perf`-Vergleich:
+
+```shell
+# Event 'cycles:P'
+#
+# Baseline  Delta Abs  Shared Object      Symbol                                                                      
+# ........  .........  .................  ............................................................................
+#
+               +2.52%  [kernel.kallsyms]  [k] mas_next_slot
+    97.22%     +0.26%  embedded_lab       [.] Satellite::crossCorrelate(std::vector<int, std::allocator<int> > const&)
+     0.00%     -0.00%  [kernel.kallsyms]  [k] native_write_msr
+     2.78%             [kernel.kallsyms]  [k] get_page_from_freelist
+```
+
+Interner Vergleich:
+`main: 139611 microseconds.` vs. `main: 139392 microseconds.`
+
 ## 2.2 Use only primitive data types
 
 ## 2.3 Pre-Calculation of `threshold` for `SatelliteNetwork::getSatellitesWithHighestCorrelation`
