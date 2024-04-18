@@ -7,6 +7,12 @@
 
 SatelliteNetwork::SatelliteNetwork() {
     SatelliteNetwork::initializeSatellites();
+    int n = getSatellite(0)->getRegisterLength();
+    double exponent = (n + 2) / 2.0;
+    double delta_one_satellite = pow(-2, exponent) - 1;
+    double max_delta = delta_one_satellite * satellites_to_search;
+    double tmp = getSatellite(0)->getChipSequenceLength() - max_delta;
+    threshold = tmp;
 }
 
 // initialize all satellites, test some if DEBUG_MODE is enabled
@@ -57,12 +63,6 @@ int SatelliteNetwork::getNumSatellites() {
 Satellite *SatelliteNetwork::getSatellitesWithHighestCorrelation() {
     Timer timer("SatelliteNetwork::getSatellitesWithHighestCorrelation");
     static Satellite satellitesWithHighestCorrelation[satellites_to_search];  // Static to avoid returning a pointer to local stack memory.
-    int n = getSatellite(0)->getRegisterLength();
-    double exponent = (n + 2) / 2.0;
-    double delta_one_satellite = pow(-2, exponent) - 1;
-    double max_delta = delta_one_satellite * satellites_to_search;
-    double threshold = getSatellite(0)->getChipSequenceLength() - max_delta;
-
     if (DEBUG_MODE) {
         std::cout << "Threshold: " << threshold << std::endl;
     }

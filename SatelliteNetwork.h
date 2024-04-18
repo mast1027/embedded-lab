@@ -15,6 +15,7 @@ private:
     static const int num_satellites = 24;
     static const int satellites_to_search = 4;
     Satellite satellite_array[num_satellites];
+    double threshold;
 
 public:
     // Constructor
