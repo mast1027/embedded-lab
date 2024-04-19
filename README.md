@@ -178,3 +178,16 @@ Da dies natürlich für alle 24 Satelliten geschieht verbessert sich die Laufzei
 vs. `crossCorrelate: 78 microseconds.`. Dies entspricht einer Verbesserung um `164 microseconds` und um Faktor `3.1`.
 
 # 3. Benchmarking mit [perfbench.com](https://perfbench.com/)
+
+Die Datei `./combined_main.cpp` wurde (mittels des Scripts `./combine_files.sh`) erstellt, um die Laufzeit der
+Funktionen
+mittels [perfbench.com](https://perfbench.com/) zu messen.
+
+Zusätzlich wurden alle internen `DEBUG_MODE`-Ausgaben entfernt,
+sowie die intern `Timer::Timer`-Klasse entfernt, da sie zu Laufzeitfehlern auf der Webseite führen.
+Die Timer wurden an den selen stellen durch `PROFILE_START` und `PROFILE_STOP` ersetzt.
+
+## 3.1. Laufzeitmessung
+
+Die Laufzeitmessung ergibt annähernd die gleichen Werte wie die interne Laufzeitmessung. Leichte Unterschiede sind
+vermutlich auf die unterschiedlichen Laufzeitsysteme zurückzuführen.
