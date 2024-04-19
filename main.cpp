@@ -6,14 +6,7 @@
 #include "timer.h"
 
 int main(int argc, char *argv[]) {
-    Timer timer("main");
-    // read commandline arguments
-    if (argc < 2) {
-        std::cerr << "Error: No file specified. Please provide a file path as an argument." << std::endl;
-        return 1; // Return an error code
-    }
-
-    // Setup Satellite Network
+     // Setup Satellite Network
     SatelliteNetwork network = SatelliteNetwork();
 
     // print satellite network
@@ -32,24 +25,14 @@ int main(int argc, char *argv[]) {
         std::cout << std::endl;
     }
 
-    // open file
-    std::ifstream file(argv[1]); // Open the file specified by the command line
-    if (!file) {
-        std::cerr << "Error: File cannot be opened." << std::endl;
-        return 1; // Return an error code
-    }
 
     // parse file
     Timer parseFile = Timer("parseFile");
     int receivedData[RECEIVED_DATA_LENGTH * 2] = {0}; // Array to store receivedData
-    int number;
-    int i = 0;
-    while (file >> number) { // Read receivedData from the file
-        receivedData[i] = number; // Store the receivedData in the array
-        receivedData[i + RECEIVED_DATA_LENGTH] = number;
-        i++;
+    for (int i = 0; i < RECEIVED_DATA_LENGTH; i++) {
+        receivedData[i] = INIT_DATA[i];
+        receivedData[i + RECEIVED_DATA_LENGTH] = i;
     }
-    file.close(); // Close the file
     parseFile.~Timer(); // Stop the timer
 
     // print received data
@@ -68,7 +51,6 @@ int main(int argc, char *argv[]) {
     Timer crossCorrelate = Timer("crossCorrelate");
     // cross-correlate all satellites
     for (int i = 0; i < network.getNumSatellites(); i++) {
-        //ToDo: optimize this part by parallelizeing the for loop on n cores
         network.getSatellite(i)->crossCorrelate(receivedData);
         if (DEBUG_MODE) {
             std::cout << "Satellite " << i + 1 << " correlation result: ";
